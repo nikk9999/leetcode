@@ -1,0 +1,27 @@
+# https://leetcode.com/problems/shuffle-string/
+# Sol 1
+class Solution:
+    def restoreString(self, s: str, indices: List[int]) -> str:
+        visited = [False]*len(indices)
+        strList = list(s)
+        for i in range(len(indices)):
+            j = i
+            t = strList[i]
+            while not visited[j]:
+                t1 = strList[indices[j]]
+                strList[indices[j]] = t
+                visited[j] = True
+                j = indices[j]
+                t = t1
+        return "".join(strList)
+        
+# Sol 2
+class Solution:
+    def restoreString(self, s: str, indices: List[int]) -> str:
+        resultList = ['']*len(indices)
+        result = ''
+        for i in range(len(indices)):
+            resultList[indices[i]] = s[i]
+        for char in resultList:
+            result+=char
+        return result
